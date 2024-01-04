@@ -3,10 +3,10 @@
        :halign "center"
     :class "time" text))
 
-(defpoll time :interval "1s"
+(defpoll time :interval "20s"
               :initial "initial-value"  ; optional, defaults to poll at startup
               :run-while time-visible   ; optional, defaults to 'true'
-  `date +%H:%M:%S`)
+  `date +%H:%M`)
 
 (defpoll Day :interval "5s"
               :initial "initial-value"  ; optional, defaults to poll at startup
