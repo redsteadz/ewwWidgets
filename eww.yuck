@@ -1,0 +1,30 @@
+(defwidget greeter [?text]
+  (box :orientation "horizontal"
+       :halign "center"
+    :class "time" text))
+
+(defpoll time :interval "1s"
+              :initial "initial-value"  ; optional, defaults to poll at startup
+              :run-while time-visible   ; optional, defaults to 'true'
+  `date +%H:%M:%S`)
+
+(defpoll Day :interval "5s"
+              :initial "initial-value"  ; optional, defaults to poll at startup
+              :run-while time-visible   ; optional, defaults to 'true'
+  `date +%A`)
+
+(defwindow example
+           :monitor 0
+           :geometry (geometry :x "0%"
+                               :y "80px"
+                               :width "90%"
+                               :height "300px"
+                               :anchor "top center")
+           :stacking "bottom"
+
+           (box :orientation "vertical"
+                :halign "center"
+                :class "BoxContainer"
+           (greeter :text time)
+           (greeter :text Day)))
+

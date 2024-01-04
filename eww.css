@@ -1,0 +1,13 @@
+.time{
+    color: #93E1D4;
+    text-shadow: #1E1D2D 1px 0 10px;
+    font-size: 100px;
+    letter-spacing: 3px;
+    border-bottom: #93E1D4 2px solid;
+    margin-bottom: 0;
+    font-family: 'Exodar-Outline';
+}
+
+.background{
+  background: transparent;
+}
