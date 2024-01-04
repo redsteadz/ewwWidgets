@@ -3,7 +3,8 @@
         text-shadow:
           0 0 24px rgba(147, 225, 212, .7),
           0 0 54px rgba(147, 225, 212, .7),
-          0 0 114px rgba(147, 225, 212, .7);
+          0 0 114px rgba(147, 225, 212, .7),
+          5px 5px 1px black;
     font-size: 100px;
     letter-spacing: 3px;
     border-bottom: #93E1D4 2px solid;
