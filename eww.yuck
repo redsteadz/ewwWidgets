@@ -8,16 +8,29 @@
               :run-while time-visible   ; optional, defaults to 'true'
   `date +%H:%M%p`)
 
-(defwidget buttonsContainer []
+(defwidget navButton [?button command] 
+  (button :class "navButton"
+          :onclick command
+          :valign "center"
+          :halign "center"
+          :width 50
+          :height 50
+    button)
+  )
+
+(defwidget buttonsContainer [?b1 cmd1 b2 cmd2 b3 cmd3]
   (box :orientation "horizontal"
        :halign "center"
        :valign "start"
        :width 250
-       :height 50
+       :height 60
        :class "ButtonsContainer"
-       (button "⏻")
-       (button "")
-       (button "󰍃")))
+       (navButton :button b1 :command cmd1)
+       (navButton :button b2 :command cmd2)
+       (navButton :button b3 :command cmd3)
+       )
+
+  )
 
 (defwidget volumeControl []
   (box :space-evenly false
@@ -77,62 +90,8 @@
                  :space-evenly false
                  :class "NotificationArea"
                  :width "100%"
-              (box :orientation "horizontal"
-                   :halign "center"
-                   :valign "start"
-                   :width 250
-                   :height 50
-                   :class "ButtonsContainer"
-                (button :class "navButton"
-                        :onclick "notify-send 'HOLA'"
-                        :valign "center"
-                        :halign "center"
-                        :width 50
-                        :height 50
-                  "⏻")
-                (button :class "navButton"
-                        :onclick "notify-send 'HOLA'"
-                        :valign "center"
-                        :halign "center"
-                        :width 50
-                        :height 50
-                  "")
-                (button :class "navButton"
-                        :onclick "notify-send 'HOLA'"
-                        :valign "center"
-                        :halign "center"
-                        :width 50
-                        :height 50
-                  "󰍃")
-                )
-              (box :orientation "horizontal"
-                   :halign "center"
-                   :valign "start"
-                   :width 250
-                   :height 70
-                   :class "ButtonsContainer"
-                (button :class "navButton"
-                        :onclick "notify-send 'HOLA'"
-                        :valign "center"
-                        :halign "center"
-                        :width 50
-                        :height 50
-                  "󰂱")
-                (button :class "navButton"
-                        :onclick "notify-send 'HOLA'"
-                        :valign "center"
-                        :halign "center"
-                        :width 50
-                        :height 50
-                  "󰤨")
-                (button :class "navButton"
-                        :onclick "notify-send 'HOLA'"
-                        :valign "center"
-                        :halign "center"
-                        :width 50
-                        :height 50
-                  "⏻")
-                )
+              (buttonsContainer :b1 "⏻" :cmd1 "notify-send 'HOLA'" :b2 "" :cmd2 "notify-send 'HOLA'" :b3 "󰗽" :cmd3 "notify-send 'HOLA'")
+              (buttonsContainer :b1 "󰂱" :cmd1 "notify-send 'HOLA'" :b2 "󰤨" :cmd2 "notify-send 'HOLA'" :b3 "Z" :cmd3 "notify-send 'HOLA'")
               (brightnessControl)
               (volumeControl)
               (eventbox
