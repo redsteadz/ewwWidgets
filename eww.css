@@ -12,7 +12,25 @@
     font-family: 'Exodar-Outline';
 }
 
-
 .background{
   background: transparent;
 }
+
+.NotificationArea {
+  background: #181825;
+  padding: 20px;
+  padding-bottom: 30px;
+  border: #93e1d4 1px solid;
+  border-radius: 8px;
+}
+
+.calendar{
+  background: #0A0A10;
+  color: white;
+}
+
+.calendar:selected{
+  background: cyan;
+  color: red;
+}
+

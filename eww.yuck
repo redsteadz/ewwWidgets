@@ -1,4 +1,4 @@
-(defwidget greeter [?text]
+(defwidget centeredText [?text]
   (box :orientation "horizontal"
        :halign "center"
     :class "time" text))
@@ -6,14 +6,14 @@
 (defpoll time :interval "20s"
               :initial "initial-value"  ; optional, defaults to poll at startup
               :run-while time-visible   ; optional, defaults to 'true'
-  `date +%H:%M`)
+  `date +%H:%M-%p`)
 
 (defpoll Day :interval "5s"
               :initial "initial-value"  ; optional, defaults to poll at startup
               :run-while time-visible   ; optional, defaults to 'true'
   `date +%A`)
 
-(defwindow example
+(defwindow clock
            :monitor 0
            :geometry (geometry :x "0%"
                                :y "80px"
@@ -25,6 +25,30 @@
            (box :orientation "vertical"
                 :halign "center"
                 :class "BoxContainer"
-           (greeter :text time)
-           (greeter :text Day)))
+           (centeredText :text time)
+           (centeredText :text Day)))
 
+(defvar FO false)
+
+(defwindow notifT
+            :monitor 1
+            :geometry (geometry :x "1%"
+                                :y "2%"
+                                :width "20%"
+                                :height "80%"
+                                :anchor "top right")
+            :stacking "overlay"
+            (box :orientation "vertical"
+                 :halign "fill"
+                 :valign "start"
+                 :class "NotificationArea"
+                 :theme "Krypton"
+              (revealer 
+                    :transition "slideup"
+                    :reveal FO
+                    :duration "500ms"
+                  (label :text "hello")
+              )
+              (calendar :class "calendar")
+             )
+  )
