@@ -1,0 +1,107 @@
+* {
+  font-family: 'JetBrainsMono Nerd Fond Mono', monospace;
+}
+
+.time{
+    color: #93e1d4;
+        text-shadow:
+          0 0 24px rgba(147, 225, 212, .7),
+          0 0 54px rgba(147, 225, 212, .7),
+          0 0 114px rgba(147, 225, 212, .7),
+          5px 5px 1px black;
+    font-size: 100px;
+    letter-spacing: 3px;
+    border-bottom: #93E1D4 2px solid;
+    margin-bottom: 0;
+    font-family: 'Exodar-Outline';
+}
+
+.background{
+  background: transparent;
+}
+
+.NotificationArea {
+  background: rgba(24, 24, 37, 0.7);
+  padding: 20px;
+  padding-bottom: 30px;
+  border: rgba(147, 225, 212, 0.3) 3px solid;
+  border-radius: 8px;
+}
+
+
+.CalendarLabel{
+  font-family: 'Exodar-Outline';
+  font-weight: bold;
+  margin-top: 12px;
+  margin-bottom: 12px;
+  color: white;
+  letter-spacing: 0px;
+  font-size: 50px;
+  transition: all 0.3s ease-in-out;
+}
+
+.cal-ev:hover .CalendarLabel{
+  color: #93E1D4;
+  letter-spacing: 5px;
+}
+
+
+.calendar{
+  background: rgba(24, 24, 37, 0.0);
+  font-family: 'JetBrainsMono Nerd Fond Mono', monospace;
+  font-weight: bold;
+  font-style: italic;
+  // padding: 5px;
+  outline: 0;
+  border: none;
+  color: white;
+}
+
+.calendar:selected{
+  background: #585b70;
+  color: #74c7ec;
+}
+
+.calendar .button{
+  color: #94e2d5;
+}
+
+.navButton {
+  color: white;
+  background: #1e1e2e;
+  font-weight: bold;
+  font-size: 26px;
+  // padding: 10px;
+  box-shadow: #b4befe 5px 5px;
+  border-radius: 6px;
+  transition: all 0.1s ease-in-out;
+}
+
+.navButton:hover {
+  color: #74c7ec;
+  border-radius: 10px;
+  box-shadow: #74c7ec 6px 8px;
+  font-size: 28px;
+}
+
+.navButton:active {
+  color: orange;
+  border-radius: 10px;
+  box-shadow: orange 6px 8px;
+  font-size: 28px;
+}
+.ButtonsContainer{
+  margin: 0;
+}
+
+.brigh-ic{
+  margin-right: 20px;
+  margin-top: 15px;
+  font-size: 24px;
+}
+
+slider{
+  color: white;
+  background: #94e2d5;
+}
+

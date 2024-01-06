@@ -25,10 +25,9 @@ def add_object(notif):
     timer_thread.start()
 
 def print_state():
-    
     string = ""
     for item in notifications:
-        string = string + f"""
+        string += f"""
                   (button :class 'notif'
                    (box :orientation 'horizontal' :space-evenly false
                       (image :image-width 80 :image-height 80 :path '{item.icon or ''}')
@@ -39,12 +38,6 @@ def print_state():
                   """
     string = string.replace('\n', ' ')
     print(fr"""(box :orientation 'vertical' {string or ''})""", flush=True)
-
-# def print_state():
-#     string = ""
-#     for item in notifications:
-#         string = string + f"{item}"
-#     print(string, flush=True)
 
 class NotificationServer(dbus.service.Object):
     def __init__(self):
@@ -62,7 +55,7 @@ class NotificationServer(dbus.service.Object):
         print("  Actions:", actions)
         print("  Hints:", hints)
         print("  Timeout:", timeout)
-        # add_object(Notification(summary, body, app_icon))
+        add_object(Notification(summary, body, app_icon))
         return 0
 
     @dbus.service.method('org.freedesktop.Notifications', out_signature='ssss')

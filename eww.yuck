@@ -6,13 +6,42 @@
 (defpoll time :interval "20s"
               :initial "initial-value"  ; optional, defaults to poll at startup
               :run-while time-visible   ; optional, defaults to 'true'
-  `date +%H:%M-%p`)
+  `date +%H:%M%p`)
 
-(defpoll Day :interval "5s"
-              :initial "initial-value"  ; optional, defaults to poll at startup
-              :run-while time-visible   ; optional, defaults to 'true'
-  `date +%A`)
+(defwidget buttonsContainer []
+  (box :orientation "horizontal"
+       :halign "center"
+       :valign "start"
+       :width 250
+       :height 50
+       :class "ButtonsContainer"
+       (button "⏻")
+       (button "")
+       (button "󰍃")))
 
+(defwidget volumeControl []
+  (box :space-evenly false
+       :valign "center"
+      (label :class "brigh-ic" :valign "center" :text "󰕾")
+       (scale        :min 0.0
+                     :draw-value true
+                     :round-digits 1
+                     :width 200
+                     :max 2
+                     :class "brightCtl"
+                     :onchange "playerctl volume {}")))
+
+(defwidget brightnessControl []
+  (box :space-evenly false
+       :valign "center"
+      (label :class "brigh-ic" :valign "center" :text "󰃠")
+       (scale        :min 1
+                     :draw-value true
+                     :value 5
+                     :width 200
+                     :max 100
+                     :class "brightCtl"
+                     :onchange "brightnessctl s {}%")))
 (defwindow clock
            :monitor 0
            :geometry (geometry :x "0%"
@@ -26,29 +55,102 @@
                 :halign "center"
                 :class "BoxContainer"
            (centeredText :text time)
-           (centeredText :text Day)))
+           ))
 
 (defvar FO false)
+(defvar FA false)
+
 
 (defwindow notifT
-            :monitor 1
+            :monitor 0
             :geometry (geometry :x "1%"
                                 :y "2%"
-                                :width "20%"
-                                :height "80%"
+                                :width "10%"
+                                :height "1%"
                                 :anchor "top right")
             :stacking "overlay"
+            (revealer :reveal true :transition "slidedown"
+              
             (box :orientation "vertical"
-                 :halign "fill"
-                 :valign "start"
+                 ;; :halign "start"
+                 ;; :valign "start"
+                 :space-evenly false
                  :class "NotificationArea"
-                 :theme "Krypton"
-              (revealer 
-                    :transition "slideup"
-                    :reveal FO
-                    :duration "500ms"
-                  (label :text "hello")
-              )
-              (calendar :class "calendar")
-             )
+                 :width "100%"
+              (box :orientation "horizontal"
+                   :halign "center"
+                   :valign "start"
+                   :width 250
+                   :height 50
+                   :class "ButtonsContainer"
+                (button :class "navButton"
+                        :onclick "notify-send 'HOLA'"
+                        :valign "center"
+                        :halign "center"
+                        :width 50
+                        :height 50
+                  "⏻")
+                (button :class "navButton"
+                        :onclick "notify-send 'HOLA'"
+                        :valign "center"
+                        :halign "center"
+                        :width 50
+                        :height 50
+                  "")
+                (button :class "navButton"
+                        :onclick "notify-send 'HOLA'"
+                        :valign "center"
+                        :halign "center"
+                        :width 50
+                        :height 50
+                  "󰍃")
+                )
+              (box :orientation "horizontal"
+                   :halign "center"
+                   :valign "start"
+                   :width 250
+                   :height 70
+                   :class "ButtonsContainer"
+                (button :class "navButton"
+                        :onclick "notify-send 'HOLA'"
+                        :valign "center"
+                        :halign "center"
+                        :width 50
+                        :height 50
+                  "󰂱")
+                (button :class "navButton"
+                        :onclick "notify-send 'HOLA'"
+                        :valign "center"
+                        :halign "center"
+                        :width 50
+                        :height 50
+                  "󰤨")
+                (button :class "navButton"
+                        :onclick "notify-send 'HOLA'"
+                        :valign "center"
+                        :halign "center"
+                        :width 50
+                        :height 50
+                  "⏻")
+                )
+              (brightnessControl)
+              (volumeControl)
+              (eventbox
+                :onhover "eww -c . update FO=true"
+                :valign "center"
+                :halign "center"
+                :class "cal-ev"
+                (label :class "CalendarLabel" :text time)
+               )
+              (revealer :vexpand false
+                        :reveal FO
+                        :transition "slidedown"
+                   :class "CalendarContainer"
+              (eventbox
+                :onhover "eww -c . update FO=true"
+                :onhoverlost "eww -c . update FO=false"
+                (calendar :visible true :class "calendar")
+               )
+               )
+             ))
   )
