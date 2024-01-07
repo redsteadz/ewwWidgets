@@ -3,13 +3,15 @@
        :halign "center"
     :class "time" text))
 
+(defvar time-visible false)
+
 (defpoll time :interval "20s"
               :initial "initial-value"  ; optional, defaults to poll at startup
               :run-while time-visible   ; optional, defaults to 'true'
   `date +%H:%M%p`)
 
-(defwidget navButton [?button command] 
-  (button :class "navButton"
+(defwidget navButton [?button command c] 
+  (button :class "navButton ${c}"
           :onclick command
           :valign "center"
           :halign "center"
@@ -18,16 +20,16 @@
     button)
   )
 
-(defwidget buttonsContainer [?b1 cmd1 b2 cmd2 b3 cmd3]
+(defwidget buttonsContainer [?b1 cmd1 class1 b2 cmd2 class2 b3 cmd3 class3]
   (box :orientation "horizontal"
        :halign "center"
        :valign "start"
        :width 250
        :height 60
        :class "ButtonsContainer"
-       (navButton :button b1 :command cmd1)
-       (navButton :button b2 :command cmd2)
-       (navButton :button b3 :command cmd3)
+       (navButton :button b1 :command cmd1 :c class1)
+       (navButton :button b2 :command cmd2 :c class2)
+       (navButton :button b3 :command cmd3 :c class3)
        )
 
   )
@@ -85,13 +87,15 @@
             (revealer :reveal true :transition "slidedown"
               
             (box :orientation "vertical"
-                 ;; :halign "start"
-                 ;; :valign "start"
                  :space-evenly false
                  :class "NotificationArea"
                  :width "100%"
-              (buttonsContainer :b1 "⏻" :cmd1 "notify-send 'HOLA'" :b2 "" :cmd2 "notify-send 'HOLA'" :b3 "󰗽" :cmd3 "notify-send 'HOLA'")
-              (buttonsContainer :b1 "󰂱" :cmd1 "notify-send 'HOLA'" :b2 "󰤨" :cmd2 "notify-send 'HOLA'" :b3 "Z" :cmd3 "notify-send 'HOLA'")
+              (buttonsContainer :b1 "⏻" :cmd1 "notify-send 'HOLA'" :class1 "r1B1"
+                                :b2 "" :cmd2 "notify-send 'HOLA'" :class2 "r1B2"
+                                :b3 "󰗽" :cmd3 "notify-send 'HOLA'" :class3 "r1B3")
+              (buttonsContainer :b1 "󰂱" :cmd1 "notify-send 'HOLA'" :class1 "r2B1"
+                                :b2 "󰤨" :cmd2 "notify-send 'HOLA'" :class2 "r2B2"
+                                :b3 "" :cmd3 "notify-send 'HOLA'" :class3 "r2B3")
               (brightnessControl)
               (volumeControl)
               (eventbox
