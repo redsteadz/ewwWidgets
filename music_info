@@ -1,0 +1,8 @@
+while true; do
+    link=$(playerctl metadata --format '{{mpris:artUrl}}')
+    curl -s -o /tmp/temp.png "$link"
+
+    echo "/tmp/temp.png"
+
+    sleep 5
+done

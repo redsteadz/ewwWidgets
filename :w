@@ -3,29 +3,12 @@
        :halign "center"
     :class "time" text))
 
-(defvar notifOpen true)
-(defvar wifiWindow false)
-
 (defvar time-visible false)
 
 (defpoll time :interval "20s"
               :initial "initial-value"  ; optional, defaults to poll at startup
-              :run-while notifOpen   ; optional, defaults to 'true'
+              :run-while time-visible   ; optional, defaults to 'true'
   `date +%H:%M%p`)
-
-(defpoll playerTitle :interval "5s"
-              :initial "initial-value"  ; optional, defaults to poll at startup
-              :run-while notifOpen
-  `playerctl metadata xesam:title`)
-(defpoll playerArtist :interval "5s"
-              :initial "initial-value"  ; optional, defaults to poll at startup
-              :run-while notifOpen
-  `playerctl metadata xesam:artist`)
-
-
-(deflisten playerImg
-              :initial "/tmp/temp.png"  ; optional, defaults to poll at startup
-  `./music_info`)
 
 (defwidget navButton [?button command c] 
   (button :class "navButton ${c}"
@@ -52,30 +35,26 @@
 
   )
 
-(defwidget volumeControl [? orient]
-  (box :space-evenly false :orientation orient
+(defwidget volumeControl []
+  (box :space-evenly false
        :valign "center" :class "brightBox r1B2" :halign "center"
       (label :class "brigh-ic" :valign "center" :text "󰕾")
        (scale        :min 0.0
                      :round-digits 1
-                     ;; :width 240
-                     :height 240
+                     :width 240
                      :max 2
-                     :orientation orient
                      :class "brightCtl"
                      :onchange "playerctl volume {}")))
 
-(defwidget brightnessControl [? orient]
-  (box :space-evenly false :orientation orient
+(defwidget brightnessControl []
+  (box :space-evenly false
        :valign "center" :class "brightBox r2B2" :halign "center"
-      (label :class "brigh-ic" :valign "center" :halign "center" :text "󰃠")
+      (label :class "brigh-ic" :valign "center" :text "󰃠")
        (scale        :min 1
                      :draw-value false
                      :value 5
-                     ;; :width 240
-                     :height 240
+                     :width 240
                      :max 100
-                     :orientation orient
                      :class "brightCtl"
                      :onchange "brightnessctl s {}%")))
 
@@ -96,28 +75,28 @@
 (defvar selectedClass "")
 (defvar networks "(label :text 'Press Refresh to load' :class 'default_label' :wrap false)")
 
-
 (defwidget menu []
-    (revealer
-    :transition "slideleft"
-    :reveal true
-    :duration "1000ms"
-      (box :orientation "vertical"
-           :space-evenly false
-        (box :orientation "horizontal" :halign "fill" :space-evenly true 
+    (box :orientation "vertical"
+         :space-evenly false
+      (box :orientation "horizontal" :halign "fill" :space-evenly true 
 
-            (button :width 20 :height 20 :onclick "python network.py" :class "navButton r1B1 netButton" :timeout "6000ms"  "󰑓" )
-            (button :width 20 :height 20 :onclick "eww -c . close inputWindow" :class "navButton r1B1 netButton" "")
+          (button :width 20 :height 20 :onclick "python network.py" :class "navButton r1B1 netButton" :timeout "2000ms"  "󰑓" )
+          (button :width 20 :height 20 :onclick "eww -c . close inputWindow" :class "navButton r1B1 netButton" "")
 
+        )
+      (label :class "menuTitle r2B2" :text selectedItem)
+      (input :password true :width 200 :class 'passInput r2B1' :placeholder "Password"
+          :onaccept "nmcli device wifi connect ${selectedItem} password {}"
+        )
+          (box :orientation "vertical" :space-evenly false :hexpand false
+            ;; (combo-box-text :items netNames :class "netSelect" :onchange "eww -c . update selectedItem={}")
+          ;; (button :class "navButton netButton"
+          ;;         :onclick "eww -c . update selectedItem='Hamees'" :timeout "500ms" :valign "center" :halign "center" :width 200 :height 30 
+          ;;   "Hamees")
+          (literal :content networks)
           )
-        (label :class "menuTitle r2B2" :text selectedItem)
-        (input :password true :width 200 :class 'passInput r2B1' :placeholder "Password"
-            :onaccept "nmcli device wifi connect ${selectedItem} password {}"
-          )
-            (box :orientation "vertical" :space-evenly false :hexpand false
-            (literal :content networks)
-            )
-        ))
+
+        )
      )
 
 
@@ -139,41 +118,15 @@
     )
   )
 
-(defwidget playerInfo []
-  (box :orientation "horizontal" :space-evenly false :valign "center" :vexpand false
-    (box :orientation "vertical" :space-evenly false
-      (box :orientation "vertical" :style "font-size:15px; padding:5px; margin-top:25px" :class "navButton" (label :class "navButtons" :wrap true :limit-width 15 :text playerTitle)
-(label :class "navButtons" :wrap true :limit-width 15 :text playerArtist)
-        )
-    (image :style "margin-top:25px;" :image-width 150 :image-height 150 :path playerImg)
-      )
-  )
-)
-
-(defwidget playerControl []
-  (box :orientation "vertical" :space-evenly false :style "margin-top:30px;"
-  (box :halign "center" :orientation "horizontal" :valign "center" :class "playerControl"
-    (button :width 50 :height 50 :class "navButton r1B3" :onclick "playerctl previous" :timeout "500ms" "󰼨")
-    (button :width 50 :height 50 :class "navButton r1B3" :onclick "playerctl play-pause" :timeout "500ms" "󱖐")
-    (button :width 50 :height 50 :class "navButton r1B3" :onclick "playerctl next" :timeout "500ms" "󰼧")
-    )
-    (playerInfo)
-    )
-  )
-
-(defwidget thingControl []
-  (box 
-      (volumeControl :orient "vertical")
-      (brightnessControl :orient "vertical")
-    )
-  )
-
-(defwidget playerctl []
+(defwidget playerctl
     (box :orientation "horizontal"
-         :halign "baseline" :valign "start"
-      (playerControl)
-      (thingControl)
+         :space-evenly false
+         :halign "fill"
+      (button :class "playerctlButton" :onclick "playerctl play-pause" :timeout "500ms" "󰐊")
+      (button :class "playerctlButton" :onclick "playerctl next" :timeout "500ms" "󰑎")
+      (button :class "playerctlButton" :onclick "playerctl previous" :timeout "500ms" "󰑍")
     )
+  
   )
 
 (defwindow notifT
@@ -183,9 +136,7 @@
                                 :width "10%"
                                 :anchor "top right")
             :stacking "fg"
-            (revealer :reveal notifOpen
-                      :transition "slideleft"
-                      :duration "100ms"
+            (revealer :reveal true :transition "slidedown"
               
             (box :orientation "vertical"
                  :space-evenly false
@@ -197,9 +148,8 @@
               (buttonsContainer :b1 "󰂱" :cmd1 "notify-send 'HOLA'" :class1 "r2B1"
                                 :b2 "󰤨" :cmd2 "python network.py &&eww -c . open inputWindow" :class2 "r2B2"
                                 :b3 "" :cmd3 "notify-send 'HOLA'" :class3 "r2B3")
-              ;; (brightnessControl)
-              ;; (volumeControl)
-              (playerctl)
+              (brightnessControl)
+              (volumeControl)
               ;; (notification)
 
                             (eventbox

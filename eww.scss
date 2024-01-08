@@ -21,50 +21,15 @@
 }
 
 .NotificationArea {
-  background: rgba(24, 24, 37, 0.7);
+  background: rgba(24, 24, 37, 0.6);
   padding: 20px;
   padding-bottom: 30px;
-  border: rgba(147, 225, 212, 0.3) 3px solid;
+  // border: rgba(147, 225, 212, 0.3) 3px solid;
   border-radius: 8px;
 }
 
 
-.CalendarLabel{
-  font-family: 'Exodar-Outline';
-  font-weight: bold;
-  margin-top: 12px;
-  margin-bottom: 12px;
-  color: white;
-  letter-spacing: 0px;
-  font-size: 50px;
-  transition: all 0.3s ease-in-out;
-}
 
-.cal-ev:hover .CalendarLabel{
-  color: #93E1D4;
-  letter-spacing: 5px;
-}
-
-
-.calendar{
-  background: rgba(24, 24, 37, 0.0);
-  font-family: 'JetBrainsMono Nerd Fond Mono', monospace;
-  font-weight: bold;
-  font-style: italic;
-  // padding: 5px;
-  outline: 0;
-  border: none;
-  color: white;
-}
-
-.calendar:selected{
-  background: #585b70;
-  color: #74c7ec;
-}
-
-.calendar .button{
-  color: #94e2d5;
-}
 
 .navButton {
   color: white;
@@ -121,14 +86,135 @@
   margin: 0;
 }
 
-.brigh-ic{
-  margin-right: 20px;
-  margin-top: 15px;
+
+.notif{
+  background: transparent;
+  margin: 0;
+  margin-top: 10px;
+  outline: none;
+  // box-shadow: rgb(137, 180, 250, 0.7) 6px 4px;
+  transition: all 0.1s ease-in-out;
+  font-size: 16px;
+}
+
+.notiflabel{
+  font-weight: bold;
   font-size: 24px;
+}
+.Nonotiflabel{
+  font-weight: bold;
+  margin-top: 10px;
+  font-style:italic;
+  font-size: 16px;
+}
+
+.title{
+  font-weight: bold;
+  border-bottom: #94e2d5 2px dotted;
 }
 
 slider{
   color: white;
-  background: #94e2d5;
+  border: none;
+  opacity:0;
+  background: transparent;
 }
+
+
+.brightCtl trough {
+    background-color: rgb(30, 30, 46);
+    border-radius: 1rem;
+    min-height: 2.25rem;
+}
+.brightCtl trough highlight {
+    background-color: #94e2d5;
+    border-radius: 1rem;
+    min-width: 2.25rem;
+}
+.brightBox {
+  background-color: rgb(30, 30, 46);
+  border: #94e2d5 2px solid;
+  margin-top:16px;
+  margin-bottom:10px;
+  border-radius: 1rem;
+}
+
+.brigh-ic{
+  margin-right: 6px;
+  font-size: 24px;
+}
+
+
+
+.CalendarLabel{
+  font-family: 'Exodar-Outline';
+  font-weight: bold;
+  margin-top: 12px;
+  margin-bottom: 12px;
+  color: white;
+  letter-spacing: 0px;
+  font-size: 50px;
+  transition: all 0.3s ease-in-out;
+}
+
+.cal-ev:hover .CalendarLabel{
+  color: #93E1D4;
+  letter-spacing: 5px;
+}
+
+
+.calendar{
+  background: rgba(24, 24, 37, 0.3);
+  font-family: 'JetBrainsMono Nerd Fond Mono', monospace;
+  font-weight: bold;
+  font-style: italic;
+  font-size: 18px;
+  // padding: 5px;
+  outline: 0;
+  border: none;
+  color: white;
+}
+
+.calendar:selected{
+  background: #585b70;
+  color: #74c7ec;
+}
+
+.calendar .button{
+  color: #94e2d5;
+}
+
+.passInput {
+  background: rgb(30, 30, 46);
+  margin-bottom:5px;
+  border:none;
+  outline:0;
+  border-bottom:1px #94e2d5 solid;
+  color: white;
+  font-size: 24px;
+}
+.netButton{
+  margin-bottom:5px;
+  font-size: 15px;
+}
+
+.netButton:hover{
+  margin-bottom:5px;
+  font-size: 15px;
+}
+
+.menuTitle {
+  background: rgb(30, 30, 46);
+  border: #94e2d5 1px solid;
+  border-radius: 0.25em 0.25em 0 0;
+  font-weight: bold;
+}
+
+.default_label{
+  background: rgb(30, 30, 46);
+  font-weight: bold;
+  border: #94e2d5 1px solid;
+  border-radius: 0 0 0.25em 0.25em;
+}
+
 

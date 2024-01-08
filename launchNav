@@ -1,0 +1,10 @@
+#!/bin/bash
+path="/home/red/Documents/ProjectsDit/ewwWidgets"
+
+state=$(eww -c "$path" get notifOpen)
+
+if [ "$state" == "true" ]; then
+  eww -c "$path" update notifOpen="false"
+else
+  eww -c "$path" update notifOpen="true"
+fi
