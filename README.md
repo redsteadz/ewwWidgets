@@ -1,1 +1,1 @@
-![image](https://github.com/redsteadz/ewwWidgets/assets/86804632/64d114d0-85df-4b97-b2a0-54a820544ae9)
+![image](https://github.com/redsteadz/ewwWidgets/assets/86804632/6e67ba5b-52a8-4b9a-a062-5445abbe6daf)
