@@ -3,7 +3,7 @@
        :halign "center"
     :class "time" text))
 
-(defvar notifOpen true)
+(defvar notifOpen false)
 (defvar wifiWindow false)
 
 (defvar time-visible false)
@@ -191,12 +191,12 @@
                  :space-evenly false
                  :class "NotificationArea"
                  :width 350
-              (buttonsContainer :b1 "⏻" :cmd1 "notify-send 'HOLA'" :class1 "r1B1"
-                                :b2 "" :cmd2 "notify-send 'HOLA'" :class2 "r1B2"
-                                :b3 "󰗽" :cmd3 "notify-send 'HOLA'" :class3 "r1B3")
+              (buttonsContainer :b1 "⏻" :cmd1 "systemctl poweroff" :class1 "r1B1"
+                                :b2 "" :cmd2 "systemctl reboot" :class2 "r1B2"
+                                :b3 "󰗽" :cmd3 "hyprctl dispatch exit" :class3 "r1B3")
               (buttonsContainer :b1 "󰂱" :cmd1 "notify-send 'HOLA'" :class1 "r2B1"
                                 :b2 "󰤨" :cmd2 "python network.py &&eww -c . open inputWindow" :class2 "r2B2"
-                                :b3 "" :cmd3 "notify-send 'HOLA'" :class3 "r2B3")
+                                :b3 "" :cmd3 "systemctl suspend" :class3 "r2B3")
               ;; (brightnessControl)
               ;; (volumeControl)
               (playerctl)
